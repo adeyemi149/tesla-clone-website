@@ -49,6 +49,8 @@ export default Section
 
 const Wrap = styled.div `
 	height: 100vh;
+	scroll-snap-align: start;
+	scroll-snap-stop: always;
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;

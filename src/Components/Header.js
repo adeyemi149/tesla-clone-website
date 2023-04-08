@@ -155,6 +155,7 @@ const RightMenu = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-right: 10px;
   
   a {
     margin-right: 10px;
