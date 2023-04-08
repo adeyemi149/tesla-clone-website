@@ -39,6 +39,7 @@ function Section({ title, backgroundimg, Description, leftBtn, rightBtn, downArr
 				<Buttons
 					leftBtn = {leftBtn}
 					rightBtn = {rightBtn}
+					downArrow = {downArrow}
 				/>
 			</Suspense>
 		</Wrap>		

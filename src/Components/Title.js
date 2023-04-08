@@ -18,4 +18,12 @@ export default Title
 const ItemText = styled.div`
 	padding-top: 15vh;
 	text-align: center;
+
+	h1 {
+		letter-spacing: 3px;
+	}
+
+	p {
+		text-decoration: underline;
+	}
 `

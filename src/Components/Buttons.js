@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Fade from 'react-reveal/Fade';
 
-const Buttons = ({leftBtn, rightBtn}) => {
+const Buttons = ({leftBtn, rightBtn, downArrow}) => {
   return (
 	<Button>
 		<Fade bottom>
@@ -14,8 +14,11 @@ const Buttons = ({leftBtn, rightBtn}) => {
 					{rightBtn}
 				</RightButton>}
 			</ButtonGroup>
-		</Fade>
-		<DownArrow src="/images/down-arrow.svg" />
+		  </Fade>
+		  {downArrow ?
+			  <DownArrow src={downArrow} />
+			  : <DownArrow src="" />
+		  }
 	</Button>
   )
 }
@@ -43,8 +46,7 @@ const LeftButton = styled.div`
 	justify-content: center;
 	align-items: center;
 	border-radius: 6px;
-	text-transform: uppercase;
-	font-size: 12px; 
+	font-size: 14px; 
 	word-spacing: .1rem;
 	letter-spacing: .1rem;
 	font-weight: 700;
@@ -61,6 +63,7 @@ const RightButton = styled(LeftButton)`
 const DownArrow = styled.img`
 	height: 40px;
 	margin-top: 20px;
+	color: black;
 	animation: animate infinite 1.5s;
 `
 
