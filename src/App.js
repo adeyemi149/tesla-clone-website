@@ -1,19 +1,21 @@
 import './App.css';
-import Header from './Components/Header';
 import Home from './Components/Home';
-import React from 'react';
+import React, {Suspense, lazy} from 'react';
 import { useSelector } from "react-redux"
 import { burgerNav } from './features/carSlice';
 import styled from 'styled-components';
 
+const Header = lazy(() => import("./Components/Header"))
+
 function App() {
   const burgerStatus = useSelector(burgerNav)
-
   return (
     <Container show={burgerStatus}>
-      <Header />
-      <Home />
-    </Container>
+      <Suspense fallback={<div />}>
+        <Header />
+      </Suspense>
+        <Home />
+      </Container>
   );
 }
 

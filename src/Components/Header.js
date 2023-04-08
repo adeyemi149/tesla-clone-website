@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { actions } from "../features/carSlice"
 
 function Header() {
-  //const [burgerStatus, setBurgerStatus] = useState(false);
   const cars = useSelector(selectCars)
   const burgerStatus = useSelector(burgerNav)
   const dispatch = useDispatch()
@@ -21,11 +20,11 @@ function Header() {
   return (
     <Container>
       <Wrap show={burgerStatus}>
-        <a>
+        <a href="/">
           <img src="/images/logo.svg" alt='' />
         </a>
         <Menu>
-            {cars && cars.map((car, index) =>
+            {cars?.map((car, index) =>
               (<li><a key={index} href='#'>{car}</a></li>)
             )}
         </Menu>
@@ -34,7 +33,7 @@ function Header() {
           <a href='#'>Shop</a>
           <a href='#'>Account</a>
           </Hide>
-          <CustomMenu onClick={setBurgerStatusTrue} />
+          <CustomMenu onClick={setBurgerStatusTrue}>Menu</CustomMenu>
         </RightMenu>
       </Wrap>
       <BurgerNav show={burgerStatus}>
@@ -52,6 +51,8 @@ function Header() {
           <li><a href='#'>Roadaster</a></li>
           <li><a href='#'>Charging</a></li>
           <li><a href='#'>Powerwall</a></li>
+          <li><a href='#'>Shop</a></li>
+          <li><a href='#'>Account</a></li>
           </Scroll>
       </BurgerNav>
     </Container>
@@ -94,7 +95,6 @@ const Menu = styled.div`
   justify-content: center;
   list-style-type: none;
   padding-left: 5.5rem;
-  flex-wrap: nowrap;
   word-spacing: 5px;
 
 
@@ -104,6 +104,8 @@ const Menu = styled.div`
     letter-spacing: 0.4px;
     position: relative;
     font-size: 15px;
+    flex-wrap: nowrap;
+    width: 100;
   }
 
   a:hover {
@@ -123,7 +125,7 @@ const Menu = styled.div`
   }
 
   a:hover::before {
-    animation: anime 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    animation: anime 287ms cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
   }
 
   @keyframes anime {
@@ -144,7 +146,7 @@ const Menu = styled.div`
     }
   }
 
-  @media (max-width: 1150px) {
+  @media (max-width: 1157px) {
     display: none;
   }
 `
@@ -181,7 +183,7 @@ const RightMenu = styled.div`
   }
 
   a:hover::before {
-    animation: anime 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    animation: anime 287ms cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
   }
 
   @keyframes anime {
@@ -203,8 +205,54 @@ const RightMenu = styled.div`
   }
 `
 
-const CustomMenu = styled(MenuIcon)`
+const CustomMenu = styled.div`
   cursor: pointer;
+ padding: 10px 15px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    position: relative;
+    font-size: 15px;
+    background-color: rgba(0, 0, 0, 0.09);
+    border-radius: 5px;
+
+   @media (min-width: 1150px) {
+    background: none;
+
+    &::before {
+    position: absolute;
+    content: '';
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 0;
+    z-index: -1;
+    background-color: rgba(0, 0, 0, 0.09);
+    border-radius: 5px;
+  }
+
+  &:hover::before {
+    animation: anime 287ms cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  }
+
+  @keyframes anime {
+    0% {
+      width: 0%;
+      height: 1px;
+      left: 50%;
+    }
+    50% {
+      width: 100%;
+      height: 1px;
+      left: 0;
+    }
+    100% {
+      width: 100%;
+      height: 100%;
+      left: 0;
+    }
+  }
+   }
+
 `
 const BurgerNav = styled.div`
   position: fixed;
@@ -273,15 +321,13 @@ const CloseWrapper = styled.div`
 `
 
 const Hide = styled.div`
-  @media (max-width: 768px) {
+  @media (max-width: 1150px) {
     display: none;
   }
 `
 
 const Scroll = styled.div`
   position: relative;
-  -webkit-scrollbar {
-  display: none; 
-}
+  overflow: auto;
   padding: 0 20px;
 `
