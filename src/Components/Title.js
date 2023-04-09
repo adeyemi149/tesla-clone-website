@@ -5,7 +5,7 @@ import styled from 'styled-components'
 const Title = ({title, Description}) => {
   return (
 	 <Fade bottom>
-		<ItemText>
+		<ItemText description={Description}>
 			<h1>{title}</h1>
 			<p>{Description}</p>
 		</ItemText>
@@ -24,6 +24,6 @@ const ItemText = styled.div`
 	}
 
 	p {
-		text-decoration: underline;
+		text-decoration: ${props => props.description == "View Inventory" ? "underline" : "none" };
 	}
 `
