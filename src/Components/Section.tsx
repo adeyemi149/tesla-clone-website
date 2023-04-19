@@ -1,14 +1,25 @@
 import React, { useEffect, useState, Suspense, lazy } from 'react'
 import styled from 'styled-components'
-import Fade from 'react-reveal/Fade';
 import "../App.css"
 import { useSelector } from 'react-redux';
 import { burgerNav } from "../features/carSlice"
- 
-const Title = lazy(() => import("../Components/Title"))
+const Fade = require("react-reveal/Fade");
+
+const Title = lazy(() => import("./Title"))
 const Buttons = lazy(() => import("./Buttons"))
 
-function Section({ title, backgroundimg, Description, leftBtn, rightBtn, downArrow }) {
+type Props = {
+	title?: string,
+	backgroundimg?: string,
+	Description?: string,
+	leftBtn?: string,
+	rightBtn?: string,
+	downArrow?: string,
+	show?: string,
+	bgImage?: string
+}
+
+const Section: React.FC<Props> = ({ title, backgroundimg, Description, leftBtn, rightBtn, downArrow }) => {
 	const [offsetY, setOffsetY] = useState(0);
 	const handleScroll = () => setOffsetY(window.pageYOffset)
 
@@ -25,30 +36,30 @@ function Section({ title, backgroundimg, Description, leftBtn, rightBtn, downArr
 	}
 
 	return (
-		<Wrap 
+		<Wrap
 			bgImage={backgroundimg}
 			show={burgerStatus}
 		>
-		<Suspense fallback={<div />}>
+			<Suspense fallback={<div />}>
 				<Title
 					title={title}
-					Description={Description} 
+					Description={Description}
 				/>
 			</Suspense>
 			<Suspense fallback={<div />}>
 				<Buttons
-					leftBtn = {leftBtn}
-					rightBtn = {rightBtn}
-					downArrow = {downArrow}
+					leftBtn={leftBtn}
+					rightBtn={rightBtn}
+					downArrow={downArrow}
 				/>
 			</Suspense>
-		</Wrap>		
-  )
+		</Wrap>
+	)
 }
 
 export default Section
 
-const Wrap = styled.div `
+const Wrap = styled.div<Props>`
 	height: 100vh;
 	scroll-snap-align: start;
 	scroll-snap-stop: always;

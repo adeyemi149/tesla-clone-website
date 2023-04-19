@@ -7,7 +7,11 @@ import { burgerNav } from '../features/carSlice';
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "../features/carSlice"
 
-function Header() {
+type showProps = {
+  show?: string
+}
+
+const Header = () => {
   const cars = useSelector(selectCars)
   const burgerStatus = useSelector(burgerNav)
   const dispatch = useDispatch()
@@ -24,8 +28,8 @@ function Header() {
           <img src="/images/logo.svg" alt='' />
         </a>
         <Menu>
-            {cars?.map((car, index) =>
-              (<li><a key={index} href='#'>{car}</a></li>)
+            {cars?.map((car: any, index: number) =>
+              (<li key={index}><a href='#'>{car}</a></li>)
             )}
         </Menu>
         <RightMenu>
@@ -41,7 +45,7 @@ function Header() {
             <CustomClose onClick={setBugerStatusToFalse} />
         </CloseWrapper>
         <Scroll>
-        {cars && cars.map((car, index) => (
+        {cars?.map((car: any, index: number) => (
             <li><a key={index} href='#'>{car}</a></li>
           ))}
           <li><a href='#'>Existing inventory</a></li>
@@ -74,7 +78,7 @@ const Container = styled.div`
     z-index: 1;
 `
 
-const Wrap = styled.div`
+const Wrap = styled.div<showProps>`
     min-width: 60px;
     display: flex;
     align-items: center;
@@ -158,7 +162,6 @@ const RightMenu = styled.div`
   margin-right: 10px;
   
   a {
-    margin-right: 10px;
     font-weight: 600;
     position: relative;
     padding: 10px;
@@ -255,7 +258,7 @@ const CustomMenu = styled.div`
    }
 
 `
-const BurgerNav = styled.div`
+const BurgerNav = styled.div<showProps>`
   position: fixed;
   top: 0;
   bottom: 0;

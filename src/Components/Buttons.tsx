@@ -1,26 +1,32 @@
 import React from 'react'
 import styled from 'styled-components'
-import Fade from 'react-reveal/Fade';
+const Fade = require("react-reveal/Fade");
 
-const Buttons = ({leftBtn, rightBtn, downArrow}) => {
-  return (
-	<Button>
-		<Fade bottom>
-			<ButtonGroup>
-				<LeftButton>
-					{leftBtn}
-				</LeftButton>
-				{rightBtn && <RightButton>
-					{rightBtn}
-				</RightButton>}
-			</ButtonGroup>
-		  </Fade>
-		  {downArrow ?
-			  <DownArrow src={downArrow} />
-			  : <DownArrow src="" />
-		  }
-	</Button>
-  )
+type Props = {
+	leftBtn?: string,
+	rightBtn?: string,
+	downArrow?: string
+}
+
+const Buttons: React.FC<Props> = ({ leftBtn, rightBtn, downArrow }) => {
+	return (
+		<Button>
+			<Fade bottom>
+				<ButtonGroup>
+					<LeftButton>
+						{leftBtn}
+					</LeftButton>
+					{rightBtn && <RightButton>
+						{rightBtn}
+					</RightButton>}
+				</ButtonGroup>
+			</Fade>
+			{downArrow ?
+				<DownArrow src={downArrow} />
+				: <DownArrow src="" />
+			}
+		</Button>
+	)
 }
 
 export default Buttons

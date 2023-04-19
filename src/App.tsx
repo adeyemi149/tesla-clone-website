@@ -7,7 +7,11 @@ import styled from 'styled-components';
 
 const Header = lazy(() => import("./Components/Header"))
 
-function App() {
+type showProps = {
+  show: string
+}
+
+const App = () => {
   const burgerStatus = useSelector(burgerNav)
   return (
     <Container show={burgerStatus}>
@@ -19,7 +23,7 @@ function App() {
   );
 }
 
-const Container = styled.div`
+const Container = styled.div<showProps>`
   overflow: ${props => props.show ? "hidden" : ""};
 `
 

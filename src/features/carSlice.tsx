@@ -18,8 +18,8 @@ const carSlice = createSlice({
 	}
 })
 
-export const selectCars = state => state.car.cars
-export const burgerNav = state => state.car.burgerStatus
+export const selectCars = (state: any) => state.car.cars
+export const burgerNav = (state: any) => state.car.burgerStatus
 
 export const actions = carSlice.actions
 
